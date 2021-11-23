@@ -20,7 +20,7 @@ const createMarkupLi = obj => {
         </div>`,
     )
     .join('');
-  info.innerHTML = '';
+  clearMarkup();
   countryList.innerHTML = markup;
 };
 
@@ -42,13 +42,15 @@ const createMarkupList = dataList => {
 `;
     })
     .join('');
-  countryList.innerHTML = '';
+  clearMarkup();
   info.innerHTML = markupList;
 };
 
 const hebdlerCountrys = e => {
   const inputName = e.target.value.trim();
-
+  if (!inputName.value) {
+    return;
+  }
   fetchCountries(inputName)
     .then(data => {
       if (data.length > 10) {
@@ -69,6 +71,10 @@ const hebdlerCountrys = e => {
       countryList.innerHTML = '';
       Notiflix.Notify.failure('Oops, there is no country with that name');
     });
+};
+const clearMarkup = () => {
+  info.innerHTML = '';
+  countryList.innerHTML = '';
 };
 
 input.addEventListener('input', debounce(hebdlerCountrys, DEBOUNCE_DELAY));
