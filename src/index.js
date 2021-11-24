@@ -48,7 +48,7 @@ const createMarkupList = dataList => {
 
 const hebdlerCountrys = e => {
   const inputName = e.target.value.trim();
-  if (!inputName.value) {
+  if (!inputName) {
     return;
   }
   fetchCountries(inputName)
